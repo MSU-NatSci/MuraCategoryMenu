@@ -1,7 +1,7 @@
-var category_menu_initialized;
 
-if (!category_menu_initialized) {
-    for (let select of document.getElementsByClassName('categorySelect')) {
+function init_category_menu(element) {
+    if (element.nodeName == 'SELECT') {
+        var select = element;
         select.addEventListener('change', (e) => {
             let option = select.options[select.selectedIndex];
             window.location.href = option.getAttribute('category-url');
@@ -10,9 +10,8 @@ if (!category_menu_initialized) {
             if (option.getAttribute('category-url') == location.pathname)
                 option.selected = 'selected';
         }
-    }
-
-    for (let nav of document.getElementsByClassName('categoryMenu')) {
+    } else if (element.nodeName == 'NAV') {
+        nav = element;
         let titleClick = (e) => {
             e.preventDefault();
             let title = e.target;
@@ -64,5 +63,4 @@ if (!category_menu_initialized) {
         }
         nav.removeAttribute('style');
     }
-    category_menu_initialized = true;
 }
