@@ -16,11 +16,6 @@
         <cfset templatePath = getCurrentTemplatePath()>
         <cfset moduleWebPath = getDirectoryFromPath(replace(templatePath.mid(webRoot.len() + 1,
             templatePath.len() - webRoot.len()), '\', '/', 'all'))>
-        <script>
-Mura(function(m) {
-    m.loader().loadcss('#moduleWebPath#category_menu.css');
-});
-        </script>
         <cfset contentURL = '/' & m.content().getFilename()>
         <cfset parentID = objectParams.parent>
         <cfset parentCategory = m.getBean('category').loadBy(categoryID=parentID)>
@@ -61,6 +56,10 @@ Mura(function(m) {
         };
         script.src = '#moduleWebPath#category_menu.js';
         elt.parentNode.appendChild(script);
+        let cssLink = document.createElement('link');
+        cssLink.rel = 'stylesheet';
+        cssLink.href = '#moduleWebPath#category_menu.css';
+        document.head.appendChild(cssLink);
     }
 }
             </script>
